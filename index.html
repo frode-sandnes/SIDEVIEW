@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script defer src='https://unpkg.com/tesseract.js@v2.1.0/dist/tesseract.min.js'></script>
+  <script src="script.js" defer></script>
+
+  <style>
+    .instruction
+      {
+        background: black;
+        color: lime;
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        z-index: 2;
+        visibility: hidden;
+      }
+    .video
+        {
+        width: 100%;
+        height: 100%;
+        background: black;
+        }
+    .progressMessage
+        {
+            position: absolute;
+            top: 15%;
+            left: 15%;
+            right: 15%;
+            bottom: 15%;
+            background: darkred;
+            color: white;
+            padding: 10%;
+            font-size: 4rem;
+            z-index: 1;
+            visibility: hidden;
+        }        
+
+    .resultText
+        {
+        position: absolute;
+        top: 0%;
+        left: 0%;
+        right: 0%;
+        bottom: 0%;
+        background: darkblue;
+        color: white;
+        padding: 5%;
+        font-size: 4rem;
+        z-index: 1;
+        visibility: hidden;           
+        }
+/*  <video class="video" autoplay muted></video>
+<video width="720" height="560" autoplay muted></video>
+
+*/
+</style>
+</head>
+<body>
+
+
+  <video width="720" height="560" autoplay muted></video>
+
+  <div id="progress" class="progressMessage">
+      Processing image
+  </div>
+
+  <div id="result" class="resultText">
+      Results come here
+  </div>
+
+  <p id = "doubleclickinfo" class="instruction">Double-click to caputre new text</p>
+  <p id = "singleclickinfo" class="instruction">Click to take picture</p>
+
+  <pre data-text style="font-size: 2rem; font-family: inherit; width: 100%; white-space: pre-wrap;"></pre>
+
+
+
+
+
+
+</body>
+</html>
