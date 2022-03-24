@@ -93,7 +93,8 @@ function consoleInput( data ) {
         { 
         video:  {
                 width: { ideal: 4096 },
-                height: { ideal: 2160 } 
+                height: { ideal: 2160 },
+                facingMode: "environment" 
                 } 
         };
 //  const stream = await navigator.mediaDevices.getUserMedia({ video: true })
