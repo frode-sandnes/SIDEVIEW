@@ -1,5 +1,6 @@
 // globals
-const video = document.querySelector("video")
+const video = document.getElementById("video1");
+const video2 = document.getElementById("video2");
 const textElem = document.querySelector("[data-text]")
 const progressMessage = document.getElementById("progress");
 const result = document.getElementById("result");
@@ -86,7 +87,8 @@ function consoleInput( data ) {
     }
 }*/
 
-
+  const devices = await navigator.mediaDevices.enumerateDevices();
+  console.log("devices",devices);
 
     // To get maximul resulution set up ideal dimensions
     var constraints = 
@@ -97,6 +99,7 @@ function consoleInput( data ) {
                 facingMode: "environment" 
                 } 
         };
+
 //  const stream = await navigator.mediaDevices.getUserMedia({ video: true })
   const stream = await navigator.mediaDevices.getUserMedia(constraints);
 
@@ -113,6 +116,32 @@ function consoleInput( data ) {
 //  video.height = stream_height;
 
   video.srcObject = stream;
+
+
+// camera 2 - for laptop repeat first camera, even though other is connected - maybe due to permision
+
+var constraints2 = 
+{ 
+video:  {
+        width: { ideal: 4096 },
+        height: { ideal: 2160 },
+        facingMode: "user" 
+        } 
+};
+const stream2 = await navigator.mediaDevices.getUserMedia(constraints2);
+let stream_settings2 = stream2.getVideoTracks()[0].getSettings();
+
+  // actual width & height of the camera video
+  let stream_width2 = stream_settings2.width;
+  let stream_height2 = stream_settings2.height;
+
+  console.log('Width: ' + stream_width2 + 'px');
+  console.log('Height: ' + stream_height2 + 'px');
+
+  video2.srcObject = stream2;
+
+
+// other stuff
 
   video.addEventListener("playing", async () => 
     {
