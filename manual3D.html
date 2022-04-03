@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple (closed loo) perspective corrections with 3D perspective</title>
+    <style>
+        body
+            {
+                background: black;
+                color: white;
+            }
+    </style>
+</head>
+<body>
+
+<script>
+    let scale = (factor) => 
+        {
+        const e = document.getElementById("iframe");
+        e.style.transform = "scaleX("+factor+")";
+        }
+    let change = () =>
+        {
+        const dist = document.getElementById("distance"); 
+        const rotX = document.getElementById("rotX");     
+        const rotY = document.getElementById("rotY");     
+        const rotZ = document.getElementById("rotZ");     
+        const i = document.getElementById("iframe");    
+        var transform =  "perspective("+dist.value+"px) rotateX("+rotX.value+"deg) rotateY("+rotY.value+"deg) rotateZ("+rotZ.value+"deg)";
+        console.log(transform);
+        i.style.transform = transform;
+        }
+    let embed = () =>
+        {
+        const e = document.getElementById("embedid");
+        const i = document.getElementById("iframe");
+        i.src = e.value;  
+        }
+</script>
+
+    <label for="scale"><span>Distance</span></label>
+    <input type="range" min="100" max="1000" value="500" id="distance" width="100%" oninput="change();">   
+    <label for="rotX"><span>X rotation</span></label>
+    <input type="range" min="-45" max="45" value="0" id="rotX" width="100%" oninput="change();">   
+    <label for="rotY"><span>Y rotation</span></label>
+    <input type="range" min="-45" max="45" value="0" id="rotY" width="100%" oninput="change();">   
+    <label for="rotZ"><span>Z rotation</span></label>
+    <input type="range" min="-45" max="45" value="0" id="rotZ" width="100%" oninput="change();">   
+  
+    <form>
+        <label for="embedid"><span>Embedding code (HTML)</span></label>
+        <input type="text" id="embedid" name="embed">
+    </form>
+    <button onclick="embed();">Submit</button>
+    <br>
+  
+
+    <iframe id="iframe" width="640" height="360" src="square.html" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+</body>
+</html>
