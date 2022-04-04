@@ -11,21 +11,18 @@
                 background: black;
                 color: white;
             }
+
     </style>
 </head>
 <body>
 
 <script>
-    let scale = (factor) => 
-        {
-        const e = document.getElementById("iframe");
-        e.style.transform = "scaleX("+factor+")";
-        }
+
     let change = () =>
         {
         const e1 = document.getElementById("scale"); 
         const e2 = document.getElementById("skew");     
-        const e3 = document.getElementById("iframe");    
+        const e3 = document.getElementById("iframeDiv");    
         const v1 = e1.value;
         const v2 = e2.value;
         var transform =  "scaleX("+(1+3*v1/100)+")";
@@ -36,7 +33,9 @@
         {
         const e = document.getElementById("embedid");
         const i = document.getElementById("iframe");
-        i.src = e.value;  
+        const el = document.getElementById("iframeDiv");
+        el.innerHTML = e.value;
+        el.style.transform = params.transform;
         }
 </script>
 
@@ -52,8 +51,10 @@
     <button onclick="embed();">Submit</button>
     <br>
   
+    <div id="iframeDiv" align="center">
+        <iframe id="iframe" width="640" height="360" src="square.html" ></iframe>
+    </div>
 
-    <iframe id="iframe" width="640" height="360" src="square.html" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 </body>
 </html>

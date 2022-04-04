@@ -16,27 +16,21 @@
 <body>
 
 <script>
-    let scale = (factor) => 
-        {
-        const e = document.getElementById("iframe");
-        e.style.transform = "scaleX("+factor+")";
-        }
     let change = () =>
         {
         const dist = document.getElementById("distance"); 
         const rotX = document.getElementById("rotX");     
         const rotY = document.getElementById("rotY");     
         const rotZ = document.getElementById("rotZ");     
-        const i = document.getElementById("iframe");    
+        const i = document.getElementById("iframeDiv");    
         var transform =  "perspective("+dist.value+"px) rotateX("+rotX.value+"deg) rotateY("+rotY.value+"deg) rotateZ("+rotZ.value+"deg)";
-        console.log(transform);
         i.style.transform = transform;
         }
     let embed = () =>
         {
         const e = document.getElementById("embedid");
-        const i = document.getElementById("iframe");
-        i.src = e.value;  
+        const i = document.getElementById("iframeDiv");
+        i.innerHTML = e.value;
         }
 </script>
 
@@ -56,8 +50,9 @@
     <button onclick="embed();">Submit</button>
     <br>
   
-
-    <iframe id="iframe" width="640" height="360" src="square.html" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <div id="iframeDiv" align="center">
+        <iframe id="iframe" width="640" height="360" src="square.html" ></iframe>
+    </div>
 
 </body>
 </html>

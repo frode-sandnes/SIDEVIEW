@@ -1,7 +1,6 @@
 // globals
 const video = document.querySelector("video")
 const textElem = document.querySelector("[data-text]")
-const progressMessage = document.getElementById("progress");
 const singleclickinfo = document.getElementById("singleclickinfo");
 const doubleclickinfo = document.getElementById("doubleclickinfo");
 var canvas;
@@ -12,8 +11,7 @@ let processing = async () =>
   // deactivate mouse events while processing
   document.removeEventListener("mousedown", processing);
   // show different status
-  progressMessage.style.visibility = "visible";     
-  singleclickinfo.style.visibility = "hidden";    
+  singleclickinfo.style.visibility = "none";    
   // Copy image from camera on invisible canvas
   canvas.getContext("2d").drawImage(video, 0, 0, video.width, video.height)
   document.body.appendChild(canvas);
@@ -21,8 +19,7 @@ let processing = async () =>
   console.log("about to process");
   findPerspectivePoints(canvas);
   
-  progressMessage.style.visibility = "hidden";   
-  video.style.visibility = "hidden";       
+  video.style.visibility = "none";       
   doubleclickinfo.style.visibility = "visible";  
   // Go to new state  
   document.addEventListener("dblclick", viewing);
@@ -31,10 +28,9 @@ let processing = async () =>
 let viewing = async () =>
   {
   document.removeEventListener("dblclick", viewing);
-  progressMessage.style.visibility = "hidden";       
   video.style.visibility = "visible";              
   singleclickinfo.style.visibility = "visible";    
-  doubleclickinfo.style.visibility = "hidden";  
+  doubleclickinfo.style.visibility = "none";  
   document.addEventListener("mousedown", processing);
   }
 
@@ -453,7 +449,6 @@ let findInverseProjection = async(pts) =>
 
 
   drawBox(invertedSquarePts, "#00FF00");
-  drawBox([ {x: 10, y:10},{x: 100, y:10},{x: 100, y:100},{x: 10, y:100}], "#00FFFF");
   
     // 2D tranform params
   const params = analyzeInverseProjection(invertedSquarePts);
@@ -500,8 +495,6 @@ let analyzeInverseProjection = (points) =>
   var skewX = angles[xIdx];
   var skewY = angles[yIdx];
   console.log("2d-transorm params",scalingX,skewX,skewY);
-  document.getElementById("transform").style.transform = CSS2DTransform(scalingX,skewX,skewY);
-  console.log(document.getElementById("transform").style.transform);
   return {scalingX:scalingX,skewX:skewX,skewY:skewY};
   }
 
@@ -512,22 +505,20 @@ let  CSS2DTransform = (scalingX,skewX,skewY) =>
 
 let addResultingURL = (param,embed) =>
   {
-//  const transform = encodeURIComponent(CSStransformStr(param.dist,param.Yrot,param.Xrot,param.Zrot));
   const transform = encodeURIComponent(CSS2DTransform(param.scalingX,param.skewX,param.skewY));
   const link = "viewer.html" + "?transform=" + transform + "&embed=" + encodeURIComponent(embed);
   const e = document.getElementById("finalMessage");
   e.innerHTML += "<p>Set up the display with the following link.</p>";
   e.innerHTML += "<a href="+link+">"+link+"</a>";
   e.innerHTML += "<p></p>";
-
-  // just for debut - sets the result
-  document.getElementById("transform").style.transform = transform;
+  video.style.visibility = "none"; 
+  video.remove();  
   }
 
 
   
 // for operation
- setup();
+setup();
 
 // for offline Testing
 //offlineTesting();

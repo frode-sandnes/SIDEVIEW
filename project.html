@@ -26,38 +26,17 @@
         height: 100%;
         background: black;
         }
-    .progressMessage
-        {
-            position: absolute;
-            top: 15%;
-            left: 15%;
-            right: 15%;
-            bottom: 15%;
-            background: darkred;
-            color: white;
-            padding: 10%;
-            font-size: 4rem;
-            z-index: 1;
-            visibility: hidden;
-        }        
-
+     
 </style>
 </head>
 <body>
 
-  <div id="transform" style="transform: perspective(410px) rotateY(38deg) rotateX(-4deg); background: green; position: absolute; top: 10px; left: 10px; width:100px;height: 100px;" >Test</div>
-
-
+  
   <video width="720" height="560" autoplay muted></video>
-
-  <div id="progress" class="progressMessage">
-      Processing image
-  </div>
 
    <p id = "doubleclickinfo" class="instruction">Double-click to caputre new text</p>
   <p id = "singleclickinfo" class="instruction">Click to take picture</p>
 
-  <pre data-text style="font-size: 2rem; font-family: inherit; width: 100%; white-space: pre-wrap;"></pre>
 
   <div id="finalMessage"></div>
 </body>
